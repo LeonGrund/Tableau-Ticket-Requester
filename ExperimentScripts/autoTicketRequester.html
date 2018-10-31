@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+  function GetTicket()
+  {
+    if (!sessionStorage.getItem("submitted")) { 
+      console.log("submitting");
+      sessionStorage.setItem("submitted", "true");
+      document.form1.submit();
+      request.responseType
+    } else {
+      console.log("already submitted, not repeating");
+        sessionStorage.removeItem("submitted");
+    }
+  }
+</script>
+</head>  
+<body onload="GetTicket()">
+<form method="POST" id="form1" name="form1">
+  <input type="text" name="username" value="<USERNAME>" />   
+  <input type="text" id="server" name="server" value="https://<SERVERNAME>/trusted" />
+  <input type="text" id="client_ip" name="client_ip" value="" />
+  <input type="text" id="target_site" name="target_site" value="" />
+</form>
+<h4>Be sure to add your IP as a Trusted IP address to the server</h4>
+</body>
+</html>
