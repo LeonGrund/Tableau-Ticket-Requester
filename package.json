@@ -1,0 +1,26 @@
+{
+  "name": "Tableau-Ticket-Requester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeonGrund/Tableau-Ticket-Requester.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeonGrund/Tableau-Ticket-Requester/issues"
+  },
+  "homepage": "https://github.com/LeonGrund/Tableau-Ticket-Requester#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "querystring": "^0.2.0",
+    "redirect": "^0.2.0",
+    "request": "^2.88.0"
+  }
+}
