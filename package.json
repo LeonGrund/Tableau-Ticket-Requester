@@ -21,6 +21,7 @@
   "homepage": "https://github.com/LeonGrund/Tableau-Ticket-Requester#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "parcel": "^1.10.3",
     "querystring": "^0.2.0",
     "redirect": "^0.2.0",
     "request": "^2.88.0"
