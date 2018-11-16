@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Trusted Ticket Requester</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script>
+        var TicketRequester = {
+            
+            setup: function() {
+                console.log( "ready!" );
+                $('#submit').trigger('click');     //simulate clicking the submit button on form
+                //TicketRequester.autoSubmitForm(); //CORS issue
+            },
+            
+            /*
+            submitForm: function() {
+              document.getElementById('form1').action =
+                document.getElementById('server').value + "/trusted";
+            },
+            */
+                      
+            autoSubmitForm: function() {
+                $.ajax({type: 'POST',
+                        url: 'https://<servername>/trusted',
+                        data: {'username': '<viewerID>', 'target_site': '<sitename>'},
+                        timeout: 5000,
+                        success: TicketRequester.redirectToDashboard,
+                        error: function(xhrObject, textStatus, exception) {alert('Error!');}
+                       });
+                return(false);
+            },
+            
+            redirectToDashboard: function(data, requestStatus, xhrObject){
+                console.log("Ticket: ", data);
+            }
+            
+        };
+        
+      $(TicketRequester.setup); //run setup function when document ready   
+      
+    </script>    
+    
+<style type="text/css">
+  .style1 {width: 100%;}
+  .style2 {width: 429px;}
+  #server {width: 254px;}
+</style>
+</head>
+<body>
+<h3>Trusted Ticketer</h3>
+<form action="https://<servername>/trusted" method="POST" id="form1">
+  <table class="style1">
+    <tr>
+      <td class="style2">Username</td>
+      <td><input type="text" name="username" value="<viewerID>" /></td>
+    </tr>
+    <tr>
+      <td class="style2">Server</td>
+      <td><input type="text" id="server" name="server" value="https://<servername>/trusted" /></td>
+    </tr>
+    <tr>
+      <td class="style2">Client IP (optional)</td>
+      <td><input type="text" id="client_ip" name="client_ip" value="" /></td>
+    </tr>
+    <tr>
+      <td class="style2">Site (leave blank for Default site; otherwise enter the site name)</td>
+      <td><input type="text" id="target_site" name="target_site" value="<sitename>" /></td>
+    </tr>
+    <tr>
+      <td class="style2"><input type="submit" id="submit" name="submittable" value="Get Ticket" /></td>
+      <td>&#160;</td>
+    </tr>
+  </table>
+</form>
+<h4>Be sure to add your IP as a Trusted IP address to the server</h4>
+</body>
+</html>

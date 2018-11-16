@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Trusted Ticket Requester</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script>
+        var TicketRequester = {
+            
+            setup: function() {
+                console.log( "ready!\n\n" );
+                TicketRequester.autoSubmitForm();   
+                
+            },
+                      
+            autoSubmitForm: function() {
+                $.ajax({type: 'POST',
+                        //url: 'https://14c750d1-3f80-41d5-8bd0-0f104fbac5c4.mock.pstmn.io/servername/trusted',   //URL of Mock server that responds with mock ticket
+                        url: 'https://<servername>/trusted',    //CORS issue  
+                        data: {'username': '<viewerID>', 'target_site': '<sitename>'},
+                        timeout: 5000,
+                        success: TicketRequester.redirectToDashboard,
+                        error: TicketRequester.handleError
+                       });
+                return(false);
+            },
+            
+            redirectToDashboard: function(data, requestStatus, xhrObject){
+               /* //---open console in browser to see what happend on success---
+                console.log("Reg Status: ", requestStatus);
+                console.log("XHR Obj: ", xhrObject);
+                console.log("Data: ", data);
+                alert(data);
+                //------------------------------------------------------------*/
+                alert(data);
+                
+                if (data === '-1') {    
+                    //redirect to dashboard without ticket -> requires manuel login
+                    window.location.replace("<dashboardURL>");
+                
+                } else {    
+                    //add ticket to URL and redirect
+                    window.location.replace("<dashboardURLwithTicket>");
+                }
+                 
+            },
+            
+            handleError: function(xhrObject, textStatus, exception) {  
+               /* //---open console in browser to see what happend on error---
+                console.log("Error Status: ", textStatus);
+                console.log("XHR Obj: ", xhrObject);
+                console.log("Exception: ", exception);
+                alert('Error!');
+                //------------------------------------------------------------*/
+                alert('Error!');
+                
+                //window.location.replace("<someURLlandingPage>");
+                
+            }     
+        };
+        
+      $(TicketRequester.setup); //run setup function when document ready   
+        
+    </script>    
+</head>
+<body>
+<h3>Trusted Ticketer</h3>
+</body>
+</html>
